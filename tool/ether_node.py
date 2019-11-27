@@ -30,7 +30,7 @@ class EtherNode():
     # _kf: keystore file
     # _pwd: password for keystore file
     # return accout obj: {address, privateKey, signTransaction, encrypt, signHash} for success, None for failed
-    def decrypt_keystore(self, _kf, _pwd):
+    def decrypt_keystore(self, _kf, _pwd = None):
         if _pwd is None:
             _pwd = getpass.getpass("password:")
         # open keystore file
@@ -56,6 +56,10 @@ class EtherNode():
         #update nonce
         self.nonce_value[address] = nonce + 1
         return nonce
+
+    # get balance
+    def get_balance(self, who):
+        return self.w3.eth.getBalance(Web3.toChecksumAddress(who))
 
     # create contract
     # acc_owner: owner who creates the contract
