@@ -133,6 +133,13 @@ class EtherNode():
             abi = fj['abi']
             return self.w3.eth.contract(address=addr, abi=abi)
 
+    # get contract by address and abi
+    # addr: address of contract
+    # abi: abi string for contract
+    # return None for failed, contract obj for success
+    def get_contract_by_abi(self, addr, abi):
+        return self.w3.eth.contract(address=addr, abi=abi)
+
     # transfer token
     # token: contract obj of token, created from get_contract or create_contract
     # acc_from: account who sends token
