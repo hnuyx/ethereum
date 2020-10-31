@@ -71,64 +71,68 @@ APPROVE_VALUE =  10 ** 27
 
 ################### get order depth   ##############end
 
-################### match order ##############start
+#################### match order ##############start
+#
+#btaddr = "0xa6E566f17aDB55861cd06E57c1Be8F5853EE16BE"
+#qtaddr = "0x2e9372C90c4646Ef04cF4a63A7D0685b0aA6d889"
+#btoken = enode.get_contract(btaddr, tptjson)
+#qtoken = enode.get_contract(qtaddr, tptjson)
+#
+#def get_order(bta, qta, gta, isell, acc):
+#    orderset = AttributeDict({'baseToken': btoken.address, 'quoteToken': qtoken.address, 'relayer': relayer.address})
+#    data = ym.functions.getConfigData(isell).call()
+#    #print("data:", data, data.hex(), HexBytes(data.hex()))
+#    sig = AttributeDict({'config':HexBytes('0x71ef3eed6242230a219d9dc7737cb5a3a16059708ee322e96b8c5774105b9b00'),
+#                         'r': HexBytes('0x71ef3eed6242230a219d9dc7737cb5a3a16059708ee322e96b8c5774105b9b00'),
+#                         's': HexBytes('0x71ef3eed6242230a219d9dc7737cb5a3a16059708ee322e96b8c5774105b9b00')})
+#    to = AttributeDict({'trader': acc.address,
+#                        'baseTokenAmount': bta * MAGNITUDE,
+#                        'quoteTokenAmount': qta * MAGNITUDE,
+#                        'gasTokenAmount': gta * MAGNITUDE,
+#                        'data': HexBytes(data.hex()),
+#                        'signature': sig})
+#    sh, bh, oh = ym.functions.getBQODHash(to, orderset).call()
+#    #print("order hash:", oh, oh.hex())
+#    sigh = acc.signHash(oh)
+#    #print("sigh:", sigh)
+#    sigc = ym.functions.getConfigSignature(HexBytes(sigh['v']), HexBytes(sigh['r']), HexBytes(sigh['s']), 1).call()
+#    #print("sig:", sig)
+#
+#    
+#    sig = AttributeDict({'config':HexBytes(sigc[0].hex()),
+#                         'r': HexBytes(sigc[1].hex()),
+#                         's': HexBytes(sigc[2].hex())})
+#    to = AttributeDict({'trader': acc.address,
+#                        'baseTokenAmount': bta * MAGNITUDE,
+#                        'quoteTokenAmount': qta * MAGNITUDE,
+#                        'gasTokenAmount': gta * MAGNITUDE,
+#                        'data': HexBytes(data.hex()),
+#                        'signature': sig})
+#    #print(to)
+#
+#    return to
+#
+#orderset = AttributeDict({'baseToken': btoken.address, 'quoteToken': qtoken.address, 'relayer': relayer.address})
+#
+#so1 = get_order(200, 20, 0, True, acc)
+#so2 = get_order(200, 19, 0, True, acc)
+#so3 = get_order(200, 18, 0, True, acc)
+#
+#bo = get_order(550, 55, 0, False, acc)
+#
+#print(so1)
+#print(so2)
+#print(so3)
+#print(bo)
+#print(orderset)
+#
+#enode.call_func(relayer, hd.functions.matchOrders(bo, [so3, so2, so1], [50 * MAGNITUDE, 100 * MAGNITUDE, 200 * MAGNITUDE], orderset), True)
+##enode.call_func(relayer, hd.functions.matchOrders(bo, [so3, so2], [50 * MAGNITUDE, 100 * MAGNITUDE], orderset), True)
+##enode.call_func(relayer, hd.functions.matchOrders(bo, (so3,), (50 * MAGNITUDE,), orderset), True)
+#
+#
+#################### match order ##############end
 
-btaddr = "0xa6E566f17aDB55861cd06E57c1Be8F5853EE16BE"
-qtaddr = "0x2e9372C90c4646Ef04cF4a63A7D0685b0aA6d889"
-btoken = enode.get_contract(btaddr, tptjson)
-qtoken = enode.get_contract(qtaddr, tptjson)
+################### get info #################begin
 
-def get_order(bta, qta, gta, isell, acc):
-    orderset = AttributeDict({'baseToken': btoken.address, 'quoteToken': qtoken.address, 'relayer': relayer.address})
-    data = ym.functions.getConfigData(isell).call()
-    #print("data:", data, data.hex(), HexBytes(data.hex()))
-    sig = AttributeDict({'config':HexBytes('0x71ef3eed6242230a219d9dc7737cb5a3a16059708ee322e96b8c5774105b9b00'),
-                         'r': HexBytes('0x71ef3eed6242230a219d9dc7737cb5a3a16059708ee322e96b8c5774105b9b00'),
-                         's': HexBytes('0x71ef3eed6242230a219d9dc7737cb5a3a16059708ee322e96b8c5774105b9b00')})
-    to = AttributeDict({'trader': acc.address,
-                        'baseTokenAmount': bta * MAGNITUDE,
-                        'quoteTokenAmount': qta * MAGNITUDE,
-                        'gasTokenAmount': gta * MAGNITUDE,
-                        'data': HexBytes(data.hex()),
-                        'signature': sig})
-    sh, bh, oh = ym.functions.getBQODHash(to, orderset).call()
-    #print("order hash:", oh, oh.hex())
-    sigh = acc.signHash(oh)
-    #print("sigh:", sigh)
-    sigc = ym.functions.getConfigSignature(HexBytes(sigh['v']), HexBytes(sigh['r']), HexBytes(sigh['s']), 1).call()
-    #print("sig:", sig)
-
-    
-    sig = AttributeDict({'config':HexBytes(sigc[0].hex()),
-                         'r': HexBytes(sigc[1].hex()),
-                         's': HexBytes(sigc[2].hex())})
-    to = AttributeDict({'trader': acc.address,
-                        'baseTokenAmount': bta * MAGNITUDE,
-                        'quoteTokenAmount': qta * MAGNITUDE,
-                        'gasTokenAmount': gta * MAGNITUDE,
-                        'data': HexBytes(data.hex()),
-                        'signature': sig})
-    #print(to)
-
-    return to
-
-orderset = AttributeDict({'baseToken': btoken.address, 'quoteToken': qtoken.address, 'relayer': relayer.address})
-
-so1 = get_order(200, 20, 0, True, acc)
-so2 = get_order(200, 19, 0, True, acc)
-so3 = get_order(200, 18, 0, True, acc)
-
-bo = get_order(550, 55, 0, False, acc)
-
-print(so1)
-print(so2)
-print(so3)
-print(bo)
-print(orderset)
-
-enode.call_func(relayer, hd.functions.matchOrders(bo, [so3, so2, so1], [50 * MAGNITUDE, 100 * MAGNITUDE, 200 * MAGNITUDE], orderset), True)
-#enode.call_func(relayer, hd.functions.matchOrders(bo, [so3, so2], [50 * MAGNITUDE, 100 * MAGNITUDE], orderset), True)
-#enode.call_func(relayer, hd.functions.matchOrders(bo, (so3,), (50 * MAGNITUDE,), orderset), True)
-
-
-################### match order ##############end
+################### get info #################end
