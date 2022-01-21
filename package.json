@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/hnuyx/ethereum#readme",
   "dependencies": {
-    "log4js": "^6.1.0"
+    "log4js": "^6.4.0"
   }
 }
