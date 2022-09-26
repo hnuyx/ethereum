@@ -27,8 +27,9 @@ accounts = [
         #'0xfc2003889d3430a7d0931b5ade5c7a101356efd7',
         #'0x60423Ebc63245631Ea71bdF58CF23A3949329cDb',
         #'0xc64b9765085c43137a27c3506aeda67ab7112636',
-        '0xfc2003889d3430a7d0931b5ade5c7a101356efd7',
-        '0xab890808775d51e9bf9fa76f40ee5fff124dece5',
+        #'0xfc2003889d3430a7d0931b5ade5c7a101356efd7',
+        #'0xab890808775d51e9bf9fa76f40ee5fff124dece5',
+        '0x3ddcfc89b4dd2b33d9a8ca0f60180527e9810d4b',
         ]
 
 TRANSFER_VALUE = 10**25
